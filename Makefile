@@ -39,6 +39,9 @@ C_SOURCES =  \
 Src/main.c \
 Src/stm32l4xx_it.c \
 Src/stm32l4xx_hal_msp.c \
+Src/ssd1306/ssd1306.c \
+Src/ssd1306/ssd1306_fonts.c \
+Src/ssd1306/ssd1306_test.c \
 Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_i2c.c \
 Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_i2c_ex.c \
 Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.c \
@@ -107,7 +110,9 @@ AS_DEFS =
 # C defines
 C_DEFS =  \
 -DUSE_HAL_DRIVER \
--DSTM32L412xx
+-DSTM32L412xx \
+-DSTM32L4 \
+-DSSD1306_USE_I2C
 
 
 # AS includes
@@ -116,6 +121,7 @@ AS_INCLUDES =
 # C includes
 C_INCLUDES =  \
 -IInc \
+-IInc/ssd1306 \
 -IDrivers/STM32L4xx_HAL_Driver/Inc \
 -IDrivers/STM32L4xx_HAL_Driver/Inc/Legacy \
 -IDrivers/CMSIS/Device/ST/STM32L4xx/Include \
