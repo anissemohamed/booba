@@ -91,10 +91,24 @@ void gui_process(void);
 void gui_draw_string(const char *str, GUI_ALIGNMENT_t alignment, GUI_ZONE_t zone);
 
 //==============================================================================
+//	void gui_draw_sprite(void)
+//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+//	Description	: 
+//  Function Input : x
+//  Function Input : y
+//  Function Input : width
+//  Function Input : height
+//  Function Input : sprite
+//------------------------------------------------------------------------------
+void gui_draw_sprite(uint8_t x, uint8_t y, uint8_t width, uint8_t height, const uint8_t *sprite);
+
+//==============================================================================
 //	void gui_clear(void)
 //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 //	Description	: Clear zone (Draws a black filled rectangle)
 //------------------------------------------------------------------------------
 void gui_clear(void);
+
+
 
 #endif // __GUI_H__

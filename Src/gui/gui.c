@@ -120,6 +120,27 @@ void gui_draw_string(const char *str, GUI_ALIGNMENT_t alignment, GUI_ZONE_t zone
   ssd1306_UpdateScreen();
 }
 
+
+void gui_draw_sprite(uint8_t x, uint8_t y, uint8_t width, uint8_t height, const uint8_t *sprite)
+{
+  uint8_t i, j;
+
+	uint8_t nb_byte = (width / 8);
+	if(width % 8) nb_byte++;
+
+	for(i = 0; i < height; i++){
+		for(j = 0; j < width; j++){
+			if (sprite[i*nb_byte+(j/8)] & (1<<(7-(j%8)))){
+				ssd1306_DrawPixel(x+j, y+i, White);
+			}
+			else{
+				ssd1306_DrawPixel(x+j, y+i, Black);
+			}
+		}
+	}
+  ssd1306_UpdateScreen();
+}
+
 void gui_clear(void)
 {
   ssd1306_Fill(Black);
