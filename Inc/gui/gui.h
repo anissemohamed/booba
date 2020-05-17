@@ -20,6 +20,10 @@
 //------------------------------------------------------------------------------
 //	Macros definition
 //------------------------------------------------------------------------------
+#define GUI_PROCESS_PERIOD_MS             100
+#if (GUI_PROCESS_PERIOD_MS == 0)
+# error "GUI_PROCESS_PERIOD_MS = 0 is not allowed"
+#endif
 
 //------------------------------------------------------------------------------
 //	Data types definition
@@ -87,11 +91,10 @@ void gui_process(void);
 void gui_draw_string(const char *str, GUI_ALIGNMENT_t alignment, GUI_ZONE_t zone);
 
 //==============================================================================
-//	void gui_clear(GUI_ZONE_t zone)
+//	void gui_clear(void)
 //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 //	Description	: Clear zone (Draws a black filled rectangle)
-//  Function Input : zone
 //------------------------------------------------------------------------------
-void gui_clear(GUI_ZONE_t zone);
+void gui_clear(void);
 
 #endif // __GUI_H__

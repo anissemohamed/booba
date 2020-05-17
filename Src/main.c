@@ -130,11 +130,12 @@ int main(void)
 		if (sched_flag_100ms)	{
 			sched_schedule(100,   &sched_flag_100ms);
       HAL_GPIO_TogglePin(USER_LED_GPIO_Port, USER_LED_Pin);
+      gui_process();
 		}
 		if (sched_flag_1000ms) {
 			sched_schedule(1000,   &sched_flag_1000ms);
-      sprintf(str, "CNT = %d", cnt++);
-      gui_draw_string(str, eGUI_ALIGNMENT_X_LEFT | eGUI_ALIGNMENT_Y_UP, 0);
+      // sprintf(str, "CNT = %d", cnt++);
+      // gui_draw_string(str, eGUI_ALIGNMENT_X_LEFT | eGUI_ALIGNMENT_Y_UP, 0);
 		}
 
   }

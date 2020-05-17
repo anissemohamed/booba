@@ -14,9 +14,9 @@
 #include <gui.h>
 #include <ssd1306.h>
 #include <ssd1306_fonts.h>
-// #include <screen/screen_init.h>
-// #include <screen/screen_logo.h>
-// #include <screen/screen_app.h>
+#include <screen/screen_init.h>
+#include <screen/screen_logo.h>
+#include <screen/screen_app.h>
 #include <stdio.h>
 #include <string.h>
 
@@ -49,17 +49,17 @@ void gui_process(void)
     _screen_handle.tick = 0;
   }
 
-  // switch (_screen) {
-  //   case eGUI_SCREEN_INIT:
-  //     _screen = screen_init_process(&_screen_handle);
-  //     break;
-  //   case eGUI_SCREEN_LOGO:
-  //     _screen = screen_logo_process(&_screen_handle);
-  //     break;
-  //   case eGUI_SCREEN_TEST:
-  //       _screen = screen_app_process(&_screen_handle);
-  //     break;
-  // }
+  switch (_screen) {
+    case eGUI_SCREEN_INIT:
+      _screen = screen_init_process(&_screen_handle);
+      break;
+    case eGUI_SCREEN_LOGO:
+      _screen = screen_logo_process(&_screen_handle);
+      break;
+    case eGUI_SCREEN_APP:
+        _screen = screen_app_process(&_screen_handle);
+      break;
+  }
 
   _screen_handle.tick++;
 }
@@ -120,7 +120,8 @@ void gui_draw_string(const char *str, GUI_ALIGNMENT_t alignment, GUI_ZONE_t zone
   ssd1306_UpdateScreen();
 }
 
-void gui_clear(GUI_ZONE_t zone)
+void gui_clear(void)
 {
-
+  ssd1306_Fill(Black);
+  ssd1306_UpdateScreen();
 }
