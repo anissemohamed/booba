@@ -24,6 +24,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "sched.h"
+#include "gui.h"
 #include "ssd1306.h"
 #include "ssd1306_fonts.h"
 #include "ssd1306_test.h"
@@ -73,6 +74,9 @@ static void MX_RTC_Init(void);
 int main(void)
 {
   /* USER CODE BEGIN 1 */
+  char str[32];
+  static uint8_t cnt = 0;
+
   static uint8_t  sched_flag_10ms   = 0;
 	static uint8_t  sched_flag_100ms  = 0;
 	static uint8_t  sched_flag_200ms  = 0;
@@ -108,7 +112,7 @@ int main(void)
   MX_I2C1_Init();
   MX_RTC_Init();
   /* USER CODE BEGIN 2 */
-
+  gui_init();
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -126,10 +130,11 @@ int main(void)
 		if (sched_flag_100ms)	{
 			sched_schedule(100,   &sched_flag_100ms);
       HAL_GPIO_TogglePin(USER_LED_GPIO_Port, USER_LED_Pin);
-      HAL_Delay(1000);
 		}
 		if (sched_flag_1000ms) {
 			sched_schedule(1000,   &sched_flag_1000ms);
+      sprintf(str, "CNT = %d", cnt++);
+      gui_draw_string(str, eGUI_ALIGNMENT_X_LEFT | eGUI_ALIGNMENT_Y_UP, 0);
 		}
 
   }
