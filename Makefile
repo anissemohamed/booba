@@ -39,6 +39,7 @@ C_SOURCES =  \
 Src/main.c \
 Src/stm32l4xx_it.c \
 Src/stm32l4xx_hal_msp.c \
+Src/sched/sched.c \
 Src/ssd1306/ssd1306.c \
 Src/ssd1306/ssd1306_fonts.c \
 Src/ssd1306/ssd1306_test.c \
@@ -121,6 +122,7 @@ AS_INCLUDES =
 # C includes
 C_INCLUDES =  \
 -IInc \
+-IInc/sched \
 -IInc/ssd1306 \
 -IDrivers/STM32L4xx_HAL_Driver/Inc \
 -IDrivers/STM32L4xx_HAL_Driver/Inc/Legacy \

@@ -23,6 +23,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "sched.h"
 #include "ssd1306.h"
 #include "ssd1306_fonts.h"
 #include "ssd1306_test.h"
@@ -72,7 +73,18 @@ static void MX_RTC_Init(void);
 int main(void)
 {
   /* USER CODE BEGIN 1 */
+  static uint8_t  sched_flag_10ms   = 0;
+	static uint8_t  sched_flag_100ms  = 0;
+	static uint8_t  sched_flag_200ms  = 0;
+	static uint8_t  sched_flag_500ms  = 0;
+	static uint8_t  sched_flag_1000ms = 0;
 
+  sched_init();
+	sched_schedule(10,   &sched_flag_10ms);
+	sched_schedule(100,  &sched_flag_100ms);
+	sched_schedule(200,  &sched_flag_200ms);
+	sched_schedule(500,  &sched_flag_500ms);
+	sched_schedule(1000, &sched_flag_1000ms);
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -96,7 +108,6 @@ int main(void)
   MX_I2C1_Init();
   MX_RTC_Init();
   /* USER CODE BEGIN 2 */
-  ssd1306_TestAll();
 
   /* USER CODE END 2 */
 
@@ -107,8 +118,20 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-    HAL_GPIO_TogglePin(USER_LED_GPIO_Port, USER_LED_Pin);
-    HAL_Delay(1000);
+    sched_process();
+
+		if (sched_flag_10ms) {
+			sched_schedule(10,   &sched_flag_10ms);
+		}
+		if (sched_flag_100ms)	{
+			sched_schedule(100,   &sched_flag_100ms);
+      HAL_GPIO_TogglePin(USER_LED_GPIO_Port, USER_LED_Pin);
+      HAL_Delay(1000);
+		}
+		if (sched_flag_1000ms) {
+			sched_schedule(1000,   &sched_flag_1000ms);
+		}
+
   }
   /* USER CODE END 3 */
 }
